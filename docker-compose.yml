@@ -5,7 +5,7 @@ services:
   frontend:
     build: frontend
     ports:
-      - 20080:80
+      - 8081:80
     volumes:
       # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
@@ -15,7 +15,7 @@ services:
   backend:
     build: backend
     ports:
-      - 21080:80
+      - 8080:80
     volumes:
       # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
@@ -31,6 +31,11 @@ services:
       - MYSQL_DATABASE=yii2advanced
       - MYSQL_USER=yii2advanced
       - MYSQL_PASSWORD=secret
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
 
   #pgsql:
   #  image: postgres:9.5
